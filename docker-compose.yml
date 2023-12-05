@@ -1,0 +1,30 @@
+version: '3.9'
+services:
+  db:
+    image: postgres:latest
+    container_name: db6
+    environment:
+      - POSTGRES_DB=db
+      - POSTGRES_USER=vanyapro
+      - POSTGRES_PASSWORD=mypassword
+    ports:
+      - '5432:5432'
+
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - "6379:6379"
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db6:5432/db
+      - SPRING_DATASOURCE_USERNAME=vanyapro
+      - SPRING_DATASOURCE_PASSWORD=mypassword

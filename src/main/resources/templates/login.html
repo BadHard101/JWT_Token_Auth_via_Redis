@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--    <link rel="stylesheet" type="text/css" th:href="@{static/css/login.css}"/>-->
+    <title>Login Page</title>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Login to Your Account</h2>
+      <div th:if="${loginError}" class="error-container">
+          <p class="error-message" th:text="${loginError}"></p>
+      </div>
+    <form action="#" th:action="@{/login}" method="post" th:object="${loginUser}">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" th:field="*{username}" placeholder="Enter your username"/><br/>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" th:field="*{password}" placeholder="Enter your password"/><br/>
+      </div>
+      <button type="submit">Login</button>
+
+      <h3>Still don't have an account?
+          <a href="/registration">Create account</a>
+      </h3>
+        <h3>Forgot your password?
+            <a href="/user/resetPassword">Password recovery</a>
+        </h3>
+    </form>
+  </div>
+</body>
+
+</html>
